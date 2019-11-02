@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import * as actionTypes from './actionTypes';
-import { updateObject } from '../utility';
 
 export const authStart = () => {
     return {
@@ -54,7 +53,6 @@ export const auth = (email, password, isSignup) => {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCWIu__Gzp9PChqRDj4tV4eyLuX_fkcIZU'
         }
         axios.post(url, authData).then(response => {
-            console.log(response);
             const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
             localStorage.setItem('token', response.data.idToken);
             localStorage.setItem('expirationDate', expirationDate);
@@ -62,7 +60,6 @@ export const auth = (email, password, isSignup) => {
             dispatch(authSuccess(response.data.idToken, response.data.localId));
             dispatch(checkAuthTimeout(response.data.expiresIn));
         }).catch(err => {
-            console.log(err);
             dispatch(authFail(err.response.data.error));
         });
     };

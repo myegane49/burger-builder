@@ -18,7 +18,7 @@ import axios from '../../axios-orders';
 //     bacon: .7
 // };
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     // constructor(props) {
     //     super(props);
     //     this.state = {...}
